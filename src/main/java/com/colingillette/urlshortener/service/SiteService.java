@@ -1,7 +1,6 @@
 package com.colingillette.urlshortener.service;
 
 import com.colingillette.urlshortener.entity.Site;
-import com.colingillette.urlshortener.repository.HitRepository;
 import com.colingillette.urlshortener.repository.SiteRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,7 @@ public class SiteService {
     public Optional<String> getLongUrlByShortUrl(String shortUrl) throws InternalError, IllegalArgumentException {
         Optional<String> emptyResult = Optional.empty();
 
-        if (null == shortUrl) {
+        if (null == StringUtils.trimToNull(shortUrl)) {
             throw new IllegalArgumentException("Short URL Path cannot be null");
         }
 

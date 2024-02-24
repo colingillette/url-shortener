@@ -1,6 +1,5 @@
 package com.colingillette.urlshortener.controller;
 
-import com.colingillette.urlshortener.service.HitService;
 import com.colingillette.urlshortener.service.SiteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
