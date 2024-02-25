@@ -1,6 +1,7 @@
 package com.colingillette.urlshortener.helper;
 
 import com.colingillette.urlshortener.entity.Site;
+import com.colingillette.urlshortener.model.AdminRequest;
 import jakarta.annotation.Nullable;
 
 import java.time.Instant;
@@ -27,5 +28,14 @@ public class SiteTestDataHelper {
         site.setRevisionUtc(String.valueOf(Instant.now()));
 
         return site;
+    }
+
+    public static AdminRequest getAdminRequest(@Nullable String id, String shortUrl) {
+        AdminRequest request = new AdminRequest();
+        request.setSiteId(id);
+        request.setShortUrl(shortUrl);
+        request.setLongUrl("http://www.google.com");
+        request.setCreateEmail("test@example.com");
+        return request;
     }
 }
