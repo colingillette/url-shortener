@@ -13,8 +13,10 @@ Comes with a basic H2 connection and a `Seeder` class, which will populate the d
   - [ ] Edit an existing entry
   - [ ] Delete an existing entry
   - [ ] Authentication
-  - [ ] Optional require password for redirect configuration
 - [ ] Optional require password for redirect
+  - [ ] Admin Configuration Endpoint
+- [ ] Upgrade Admin validation for real inputs
+- [ ] Generate short URL if one is not provided
 - [ ] Save state on app shutdown in H2
 - [ ] MySql database connection
 - [ ] Hosted on AWS
