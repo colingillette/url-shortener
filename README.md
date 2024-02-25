@@ -9,7 +9,7 @@ Comes with a basic H2 connection and a `Seeder` class, which will populate the d
 ## Coming Soon
 
 - [ ] Admin Controller
-  - [ ] Save a new entry
+  - [x] Save a new entry
   - [ ] Edit an existing entry
   - [ ] Delete an existing entry
   - [ ] Authentication
