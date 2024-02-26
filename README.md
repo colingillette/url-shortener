@@ -16,6 +16,7 @@ Comes with a basic H2 connection and a `Seeder` class, which will populate the d
 - [ ] Optional require password for redirect
   - [ ] Admin Configuration Endpoint
 - [ ] Upgrade Admin validation for real inputs
+- [ ] Link expiration and expiration job
 - [ ] Generate short URL if one is not provided
 - [ ] Save state on app shutdown in H2
 - [ ] MySql database connection
