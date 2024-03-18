@@ -8,6 +8,7 @@ Comes with a basic H2 connection and a `Seeder` class, which will populate the d
 
 ## Coming Soon
 
+- [ ] Fix improper use of internal server error
 - [ ] Admin Controller
   - [x] Save a new entry
   - [ ] Edit an existing entry

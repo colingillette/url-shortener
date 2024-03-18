@@ -2,7 +2,6 @@ package com.colingillette.urlshortener.service;
 
 import com.colingillette.urlshortener.entity.Site;
 import com.colingillette.urlshortener.helper.SiteTestDataHelper;
-import com.colingillette.urlshortener.model.AdminRequest;
 import com.colingillette.urlshortener.repository.SiteRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -88,7 +87,7 @@ public class SiteServiceTest {
         when(siteRepository.save(any(Site.class))).thenReturn(SiteTestDataHelper.getSampleSite());
         Site expected = SiteTestDataHelper.getSampleSite();
 
-        Site result = siteService.addSite(SiteTestDataHelper.getAdminRequest(null, "gOogLe"));
+        Site result = siteService.addSite(SiteTestDataHelper.getSampleSite(null, "gOogLe"));
 
         verify(siteRepository, times(1)).save(any(Site.class));
         assertEquals(result.getShortUrl(), expected.getShortUrl());
@@ -101,7 +100,7 @@ public class SiteServiceTest {
     void addSite_siteIdPresent() {
         assertThrows(IllegalArgumentException.class,
                 () -> siteService.addSite(
-                        SiteTestDataHelper.getAdminRequest("test-invalid-12345", "gOogLe")
+                        SiteTestDataHelper.getSampleSite("test-invalid-12345", "gOogLe")
                 )
         );
         verify(siteRepository, never()).save(any(Site.class));
@@ -114,7 +113,7 @@ public class SiteServiceTest {
     void addSite_shortUrl(String input) {
         assertThrows(IllegalArgumentException.class,
                 () -> siteService.addSite(
-                        SiteTestDataHelper.getAdminRequest(null, input)
+                        SiteTestDataHelper.getSampleSite(null, input)
                 )
         );
         verify(siteRepository, never()).save(any(Site.class));
@@ -125,7 +124,7 @@ public class SiteServiceTest {
     @EmptySource
     @DisplayName("addSite - failValidation; shortUrl null or empty")
     void addSite_longUrl(String input) {
-        AdminRequest request = SiteTestDataHelper.getAdminRequest(null, input);
+        Site request = SiteTestDataHelper.getSampleSite(null, input);
         request.setLongUrl(input);
 
         assertThrows(IllegalArgumentException.class, () -> siteService.addSite(request));
@@ -137,7 +136,7 @@ public class SiteServiceTest {
     @EmptySource
     @DisplayName("addSite - failValidation; email null or empty")
     void addSite_email(String input) {
-        AdminRequest request = SiteTestDataHelper.getAdminRequest(null, input);
+        Site request = SiteTestDataHelper.getSampleSite(null, input);
         request.setCreateEmail(input);
 
         assertThrows(IllegalArgumentException.class, () -> siteService.addSite(request));
@@ -149,6 +148,6 @@ public class SiteServiceTest {
     void addSite_failedSave() {
         when(siteRepository.save(any(Site.class))).thenThrow(OptimisticLockingFailureException.class);
         assertThrows(InternalError.class,
-                () -> siteService.addSite(SiteTestDataHelper.getAdminRequest(null, "TestFail")));
+                () -> siteService.addSite(SiteTestDataHelper.getSampleSite(null, "TestFail")));
     }
 }

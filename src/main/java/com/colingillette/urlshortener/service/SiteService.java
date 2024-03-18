@@ -1,7 +1,6 @@
 package com.colingillette.urlshortener.service;
 
 import com.colingillette.urlshortener.entity.Site;
-import com.colingillette.urlshortener.model.AdminRequest;
 import com.colingillette.urlshortener.repository.SiteRepository;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
@@ -73,12 +72,12 @@ public class SiteService {
         return siteRepository.findByShortUrl(shortUrlCaps);
     }
 
-    public Site addSite(AdminRequest request) throws IllegalArgumentException, InternalError {
+    public Site addSite(Site site) throws IllegalArgumentException, InternalError {
         try {
-            boolean isValid = validateAddSiteRequest(request);
+            boolean isValid = validateAddSiteRequest(site);
 
             if (isValid) {
-                Site newSite = getNewSiteFromRequest(request);
+                Site newSite = getNewSiteFromRequest(site);
                 return siteRepository.save(newSite);
             } else {
                 throw new IllegalArgumentException("Could not validate request");
@@ -92,26 +91,26 @@ public class SiteService {
     }
 
     // TODO: need real validation around true long URLs, short URL max length, and valid emails
-    private boolean validateAddSiteRequest(AdminRequest request) {
+    private boolean validateAddSiteRequest(Site site) {
         boolean isValid = true;
 
-        if (null != StringUtils.trimToNull(request.getSiteId())) {
+        if (null != StringUtils.trimToNull(site.getId())) {
             log.error("Create request should not specify ID");
             isValid = false;
         }
 
-        if (null == StringUtils.trimToNull(request.getShortUrl())) {
+        if (null == StringUtils.trimToNull(site.getShortUrl())) {
             // TODO: generate shortUrl if one is not specified
             log.error("Short URL cannot be null");
             isValid = false;
         }
 
-        if (null == StringUtils.trimToNull(request.getLongUrl())) {
+        if (null == StringUtils.trimToNull(site.getLongUrl())) {
             log.error("Real URL cannot be null");
             isValid = false;
         }
 
-        if (null == StringUtils.trimToNull(request.getCreateEmail())) {
+        if (null == StringUtils.trimToNull(site.getCreateEmail())) {
             log.error("Creator email cannot be null");
             isValid = false;
         }
@@ -119,12 +118,12 @@ public class SiteService {
         return isValid;
     }
 
-    private Site getNewSiteFromRequest(AdminRequest request) {
+    private Site getNewSiteFromRequest(Site siteIn) {
         Site site = new Site();
         String currentUtc = String.valueOf(Instant.now());
-        String shortUrl = StringUtils.upperCase(StringUtils.trim(request.getShortUrl()));
-        String longUrl = StringUtils.trim(request.getLongUrl());
-        String email = StringUtils.trim(request.getCreateEmail());
+        String shortUrl = StringUtils.upperCase(StringUtils.trim(siteIn.getShortUrl()));
+        String longUrl = StringUtils.trim(siteIn.getLongUrl());
+        String email = StringUtils.trim(siteIn.getCreateEmail());
 
         site.setShortUrl(shortUrl);
         site.setLongUrl(longUrl);
