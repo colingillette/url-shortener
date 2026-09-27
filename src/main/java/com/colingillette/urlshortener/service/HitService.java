@@ -14,13 +14,20 @@ public class HitService {
     @Autowired
     HitRepository hitRepository;
 
-    public void saveHit(Site site) {
+    /**
+     * Save an instance of a short url being used to navigate to a
+     * redirect long url.
+     *
+     * @param site Site being accessed
+     */
+    public void saveNewHit(Site site) {
         try {
-            Hit hit = new Hit(site.getId());
-            hitRepository.save(hit);
-            log.info("Hit logged: {}", hit);
+            Hit hit = new Hit();
+            hit.setSite(site);
+            hit = hitRepository.save(hit);
+            log.debug("hit save success: {}", hit);
         } catch (Exception e) {
-            log.error("Error saving hit for site: {}", site);
+            log.error("Error occurred while saving hit for site: {}", site, e);
         }
     }
 }
