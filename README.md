@@ -24,9 +24,9 @@ An API that accepts custom URLs and returns an associated longform counterpart.
 ## Coming Soon
 
 - [ ] Site Controller
-  - [ ] Save a new entry
+  - [X] Save a new entry
   - [ ] Delete an existing entry
-  - [ ] Edit an existing entry
+  - [X] Edit an existing entry
   - [X] Retrieve an existing entry
 - [ ] Hit Controller
   - [X] Log a hit for an existing entry
