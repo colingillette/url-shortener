@@ -36,6 +36,6 @@ public class Site {
     @Column(name = "create_utc", nullable = false)
     private Instant createUtc;
 
-    @Column(name = "revision_utc")
+    @Column(name = "revision_utc", nullable = false)
     private Instant revisionUtc;
 }

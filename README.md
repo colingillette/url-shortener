@@ -23,14 +23,17 @@ An API that accepts custom URLs and returns an associated longform counterpart.
 
 ## Coming Soon
 
-- [ ] Site Controller
+- [X] Site Controller
   - [X] Save a new entry
-  - [ ] Delete an existing entry
+  - [X] Delete an existing entry
   - [X] Edit an existing entry
   - [X] Retrieve an existing entry
-- [ ] Hit Controller
+- [X] Hit Service
   - [X] Log a hit for an existing entry
   - [X] Redirect to the longform URL
+- [ ] Admin Controller
+  - [ ] View all hits for a site
+- [ ] Unit tests
 - [ ] Generate short URL if one is not provided
 - [ ] Create an error page for invalid short URLs
 - [X] Postgres database connection

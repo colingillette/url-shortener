@@ -6,9 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface SiteRepository extends CrudRepository<Site, String> {
+public interface SiteRepository extends CrudRepository<Site, UUID> {
 
     Site findByShortUrl(String shortUrl);
 }

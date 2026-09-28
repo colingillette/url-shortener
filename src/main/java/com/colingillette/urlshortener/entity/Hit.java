@@ -18,7 +18,6 @@ import java.util.UUID;
 public class Hit {
 
     @Id
-    @GeneratedValue
     @UuidGenerator
     @Column(name = "correlation_id", nullable = false, updatable = false)
     private UUID correlationId;

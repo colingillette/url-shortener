@@ -5,6 +5,7 @@ import com.colingillette.urlshortener.model.SiteRequest;
 import com.colingillette.urlshortener.service.HitService;
 import com.colingillette.urlshortener.service.SiteService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.InternalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +62,20 @@ public class SiteController {
 
         return isUpdate ? ResponseEntity.ok(savedSite) : ResponseEntity.created(URI.create("/" + savedSite.getShortUrl()))
                 .body(savedSite);
+    }
+
+    @DeleteMapping("/site/{shortUrl}")
+    public ResponseEntity<Void> deleteSite(@PathVariable String shortUrl) {
+        Site site = siteService.findByShortUrl(shortUrl);
+        if (site != null) {
+            try {
+                siteService.delete(site);
+                return ResponseEntity.noContent().build();
+            } catch (InternalException e) {
+                return ResponseEntity.internalServerError().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
