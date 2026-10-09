@@ -4,21 +4,37 @@ An API that accepts custom URLs and returns an associated longform counterpart.
 
 ## Run Locally
 
-Comes with a basic H2 connection and a `Seeder` class, which will populate the database on app startup.
+1. Open Docker
+2. Run postrges image
+   - Ports: Add 5432 in the field
+   - Volumes: pgdata:/var/lib/postgresql/data
+   - Variable: POSTGRES_PASSWORD: <password>
+3. `docker ps` to get the container name
+4. `docker exec -it <container_name> psql -U postgres` to access the database
+5. \l to list databases
+6. \c urlshortener to connect to the database
+   - Use ddl.sql if the database is lost
+
+## Database Setup
+
+1. Create Site and Hit tables
+2. Add trigger to update revision timestamp on update of Site table
+3. Create index on site_id within Hit table.
 
 ## Coming Soon
 
-- [ ] Fix improper use of internal server error
+- [X] Site Controller
+  - [X] Save a new entry
+  - [X] Delete an existing entry
+  - [X] Edit an existing entry
+  - [X] Retrieve an existing entry
+- [X] Hit Service
+  - [X] Log a hit for an existing entry
+  - [X] Redirect to the longform URL
 - [ ] Admin Controller
-  - [x] Save a new entry
-  - [ ] Edit an existing entry
-  - [ ] Delete an existing entry
-  - [ ] Authentication
-- [ ] Optional require password for redirect
-  - [ ] Admin Configuration Endpoint
-- [ ] Upgrade Admin validation for real inputs
-- [ ] Link expiration and expiration job
+  - [ ] View all hits for a site
+- [ ] Unit tests
 - [ ] Generate short URL if one is not provided
-- [ ] Save state on app shutdown in H2
-- [ ] MySql database connection
+- [ ] Create an error page for invalid short URLs
+- [X] Postgres database connection
 - [ ] Hosted on AWS
