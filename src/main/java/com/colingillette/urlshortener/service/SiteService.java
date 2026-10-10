@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -69,5 +70,14 @@ public class SiteService {
             log.error("Error occurred while deleting site: {}", site.getShortUrl(), e);
             throw new InternalException("Error occurred while deleting site: " + site.getShortUrl());
         }
+    }
+
+    /**
+     * Return all Sites in db. Used by AdminController only.
+     *
+     * @return List of all Sites
+     */
+    public List<Site> getAllSites() {
+        return (List<Site>) siteRepository.findAll();
     }
 }

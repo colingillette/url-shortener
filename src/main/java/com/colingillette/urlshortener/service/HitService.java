@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class HitService {
@@ -29,5 +31,14 @@ public class HitService {
         } catch (Exception e) {
             log.error("Error occurred while saving hit for site: {}", site, e);
         }
+    }
+
+    /**
+     * Retrieves all hits in db. Used by AdminController only.
+     *
+     * @return List of all Hits
+     */
+    public List<Hit> getAllHits() {
+        return (List<Hit>) hitRepository.findAll();
     }
 }
